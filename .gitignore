@@ -1,0 +1,8 @@
+# MacOs DS_Store
+*.DS_Store
+
+# Yriser output
+output/
+
+# VSCode files
+.vscode/
