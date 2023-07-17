@@ -82,7 +82,7 @@ You can run Yriser from your workstation, an EC2 instance, ECS Fargate or any ot
 
 > Running the `yriser.sh` script whitout options will use your environment variable credentials.
 
-By default, Yriser will generate a CSV, HTM reports.
+By default, Yriser will generate a CSV and HTM reports.
 
 The HTML report will be located in the output directory as the other files and it will look like:
 
@@ -107,7 +107,7 @@ You can always use -a to access to the usage information and all the possible op
 Use a custom AWS profile with -p and/or AWS regions which you want to audit with -r:
 
 ``` shell
-./yriser.sh -p custom-profile -r us-east-1 eu-west-1
+./yriser.sh -p <aws_profile> -r "us-east-1 eu-west-1"
 ```
 
 > By default, Yriser will scan all AWS regions.

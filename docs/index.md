@@ -165,7 +165,7 @@ You can always use -a to access to the usage information and all the possible op
 Use a custom AWS profile with -p and/or AWS regions which you want to audit with -r:
 
 ``` shell
-./yriser.sh -p custom-profile -r us-east-1 eu-west-1
+./yriser.sh -p <aws_profile> -r "us-east-1 eu-west-1"
 ```
 
 > By default, Yriser will scan all AWS regions.
