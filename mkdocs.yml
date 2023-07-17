@@ -1,0 +1,102 @@
+# Project information
+site_name: Yriser Documentation
+site_url: https://www.docs.yriser.com/
+site_description: >-
+  Yriser Documentation Site
+
+# Theme Configuration
+theme:
+  language: en
+  logo: img/yriser-logo.png
+  name: material
+  favicon: img/yriser-logo.png
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: pink
+      toggle:
+        icon: material/weather-night
+        name: Switch to system preference
+
+edit_uri: "https://github.com/yris-ops/yriser/tree/master/docs"
+# Yriser OSS Repository
+repo_url: https://github.com/yris-ops/yriser
+repo_name: yris-ops/yriser
+
+nav:
+  - Getting Started:
+      - Overview: index.md
+      - Requirements: getting-started/requirements.md
+  - Tutorials:
+      - Command: tutorials/command.md
+      - Configuration File: tutorials/configuration-file.md
+      - Reporting: tutorials/reporting.md
+      - Best Pratices:
+          - Building your tagging strategy: tutorials/best-pratices/build.md 
+          - Cost allocation and financial management: tutorials/best-pratices/cost-allocation.md 
+          - Example Tagging Strategies: tutorials/best-pratices/example.md 
+      - AWS: 
+          - Authentication: tutorials/aws/authentication.md
+          - AWS CloudShell: tutorials/aws/cloudshell.md
+  - Security: security.md
+  - Contact Us: contact.md
+  - About: about.md
+
+# Customization
+extra:
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property: G-5WFL4K8FR3
+  social:
+    - icon: fontawesome/brands/slack
+      link: https://yrisgroupe.slack.com/join/shared_invite/zt-1q51z8dmv-GC0XzUSclzBnUQ0tpKhznw
+    - icon: fontawesome/brands/github
+      link: https://github.com/yris-ops/yriser
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/cz_antoine
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/antoine-cichowicz-837575b1/
+
+# Copyright
+copyright: Copyright &copy; 2023 Antoine CICHOWICZ, Maintained by the Yris Team
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
