@@ -49,6 +49,16 @@ Only CLI Input without CSV
 ./yriser.sh -u
 ```
 
+## Disable JSON output
+
+Only CLI Input without JSON.
+
+``` shell
+./yriser.sh -j
+```
+
+> Do not disable output without CSV (command -u) for the JSON outputs
+
 ## AWS
 
 ### AWS - Display help documentation

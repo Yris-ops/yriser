@@ -1,5 +1,5 @@
 ## TAG KEY
-Environment	
+Environment
 Date
 ## TAG VALUE
 ("development" "test" "production")

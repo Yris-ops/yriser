@@ -2,6 +2,6 @@ __  __     _
 \ \/ /____(_)_______  _____
  \  / ___/ / ___/ _ \/ ___/
  / / /  / (__  )  __/ /    
-/_/_/  /_/____/\___/_/ v0.0.0 - Moof
+/_/_/  /_/____/\___/_/ v0.0.1 - Fatboy
 An Open-Source FinOps Tool for Efficient Tag Management
 

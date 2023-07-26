@@ -6,6 +6,9 @@
 	<a href="https://github.com/yris-ops/yriser"><img alt="Repo size" src="https://img.shields.io/github/repo-size/yris-ops/yriser"></a>
   <a href="https://github.com/yris-ops/yriser/issues"><img alt="Issues" src="https://img.shields.io/github/issues/yris-ops/yriser"></a>
   <a href="https://github.com/yris-ops/yriser/releases"><img alt="Version" src="https://img.shields.io/github/v/release/yris-ops/yriser?include_prereleases"></a>
+  <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/czantoine/yriser"></a>
+  <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker" src="https://img.shields.io/docker/cloud/build/czantoine/yriser"></a>
+  <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker" src="https://img.shields.io/docker/image-size/czantoine/yriser"></a>
   <a href="https://github.com/yris-ops/yriser/releases"><img alt="Version" src="https://img.shields.io/github/release-date/yris-ops/yriser"></a>
 	<a href="https://github.com/yris-ops/yriser"><img alt="Stars" src="https://img.shields.io/github/stars/Yris-ops/yriser"></a>
   <a href="https://github.com/yris-ops/yriser"><img alt="License" src="https://img.shields.io/github/license/yris-ops/yriser"></a>
@@ -82,7 +85,7 @@ You can run Yriser from your workstation, an EC2 instance, ECS Fargate or any ot
 
 > Running the `yriser.sh` script whitout options will use your environment variable credentials.
 
-By default, Yriser will generate a CSV and HTM reports.
+By default, Yriser will generate a CSV, HTM and JSON reports.
 
 The HTML report will be located in the output directory as the other files and it will look like:
 
@@ -95,6 +98,33 @@ You can always use -h to access to the usage information and all the possible op
 ```
 
 More details at [https://www.docs.yriser.com](https://www.docs.yriser.com)
+
+## Docker
+
+Requirements:
+
+* Have `docker` installed: https://docs.docker.com/get-docker/.
+* AWS credentials.
+* In the command below, change `-v` to your local directory path in order to access the reports.
+* Before launching the Docker Image, create your `config.txt` local file.
+
+Commands:
+
+``` bash
+docker run -it \
+--name yriser \
+--env AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+--env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+--env AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+-v /your/local/dir/config.txt:/home/yriser/config.txt \
+czantoine/yriser:latest
+```
+
+Use this command to copy reports locally:
+
+```
+docker cp yriser:/home/yriser/output /path/output
+```
 
 ### AWS
 

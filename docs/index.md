@@ -58,6 +58,26 @@ Once Yriser repository is cloned, get into the folder and you can run it:
     ./yriser.sh -v
     ```
 
+=== "Docker"
+
+    _Requirements_:
+
+    * Have `docker` installed: https://docs.docker.com/get-docker/.
+    * AWS credentials
+    * In the command below, change `-v` to your local directory path in order to access the reports.
+
+    _Commands_:
+
+    ``` bash
+    docker run -it \
+    --name yriser \
+    --env AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    --env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+    --env AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN \
+    -v /your/local/dir/config.txt:/home/yriser/config.txt \
+    czantoine/yriser:latest
+    ```
+
 === "macOS"
 
     _Requirements_:

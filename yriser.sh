@@ -3,7 +3,7 @@
 # Copyright: Apache License 2.0
 # Yriser - https://github.com/yris-ops/yriser
 
-export VERSION="0.0.0-Moof-3June2023"
+export VERSION="0.0.1-Fatboy-26July2023"
 REGION_LIST="allregions"
 show_banner=true
 specific_aws_profile=true
@@ -11,6 +11,7 @@ config_file="config.txt"
 export PATH_DATE=$(date +"%Y%m%d%H%M%S")
 export cli_output_html="yes"
 export cli_output_csv="yes"
+export cli_output_json="yes"
 
 # Display Help
 COMMAND_LINE_OPTIONS_HELP='
@@ -24,6 +25,7 @@ Command line options:
     -w,   show config file
     -o,   only cli output whiout html
     -u,   only cli output whiout csv
+    -u,   only cli output whiout json
 
 Yriser Available Cloud Providers:
     -a,,  show AWS Provider help
@@ -72,6 +74,11 @@ CLI_csv(){
     export cli_output_csv="no"
 }
 
+# Only CLI Input without JSON
+CLI_json(){
+    export cli_output_json="no"
+}
+
 Config()
 {
     echo "Configuration file:"
@@ -92,7 +99,7 @@ Profile_AWS()
     AWSARN=$(echo $SSO_ARN | tr -d '"')
 }
 
-while getopts "h/a/v/b/c/o/u/y/r:/p:" option; do
+while getopts "h/a/v/b/c/o/u/j/y/r:/p:" option; do
     case $option in
       h) # display help
          echo "$COMMAND_LINE_OPTIONS_HELP"
@@ -112,6 +119,9 @@ while getopts "h/a/v/b/c/o/u/y/r:/p:" option; do
       u) # only cli output without csv
          CLI_csv
          ;;
+      j) # only cli output without json
+         CLI_json
+         ;;
       c) # display config file
          Config
          exit;;
@@ -129,8 +139,8 @@ while getopts "h/a/v/b/c/o/u/y/r:/p:" option; do
 done
 
 if [ "$cli_output_csv" = "no" ]; then
-    if [ "$cli_output_html" = "yes" ]; then
-        echo "Please disable: Output without CSV (command -u) for the HTML output"
+    if [ "$cli_output_html" = "yes" ] || [ "$cli_output_json" = "yes" ]; then
+        echo "Please disable: Output without CSV (command -u) for the HTML or JSON output"
         exit
     fi
 fi
@@ -139,11 +149,51 @@ if $show_banner; then
     cat file/logo.txt
 fi
 
+JSON()
+{
+    for file in output/csv/yriser*.csv; do
+      # Extract the filename without the extension
+      filename=$(basename -- "$file")
+      filename="${filename%.*}"
+      # Check if the JSON file already exists
+      if [ -f "output/json/$filename.json" ]; then
+        continue
+      fi
+      # Execute the jq command on the .csv file and save the result to a .json file
+      jq --slurp --raw-input --raw-output \
+        'split("\n") | .[0:] | map(split(",")) |
+        map({"ASSESSMENT_START_TIME": .[0],
+             "TAG_KEY": .[1],
+             "TAG_VALUE": .[2],
+             "RESOURCE_ID": .[3],
+             "ACCOUNT_ID": .[4],
+             "REGION": .[5]}) | map(select(.ASSESSMENT_START_TIME != null))' \
+        "$file" > "output/json/$filename.json"
+    done
+
+    for file in output/csv/mul*.csv; do
+      # Extract the filename without the extension
+      filename=$(basename -- "$file")
+      filename="${filename%.*}"
+      # Check if the JSON file already exists
+      if [ -f "output/json/$filename.json" ]; then
+        continue
+      fi
+      # Execute the jq command on the .csv file and save the result to a .json file
+      jq --slurp --raw-input --raw-output \
+        'split("\n") | .[0:] | map(split(",")) |
+        map({"TAG_VALUE": .[0],
+             "NUMBER": .[1]}) | map(select(.TAG_VALUE != null))' \
+        "$file" > "output/json/$filename.json"
+    done
+}
+
 # Create output folder for first time scan with redirected stout
 mkdir -p output
 mkdir -p output/txt
 mkdir -p output/csv
 mkdir -p output/html
+mkdir -p output/json
 
 REGION_LIST_AWS=("us-east-1" "us-east-2" "us-west-1" "us-west-2" "af-south-1" "ap-east-1" "ap-south-2" "ap-southeast-3" "ap-southeast-4" "ap-south-1" "ap-northeast-1" "ap-northeast-2" "ap-northeast-3" "ap-northeast-4" "ap-northeast-1" "ca-central-1" "eu-central-1" "eu-central-2" "eu-west-1" "eu-west-2" "eu-west-3" "eu-south-1" "eu-south-2" "eu-north-1" "sa-east-1" "me-central-1" "us-gov-east-1" "us-gov-west-1")
 
@@ -285,3 +335,7 @@ if [ ${#SSO_ACCOUNT} -eq 14 ] || aws sts get-caller-identity &> /dev/null; then
 fi 
 
 rm -rf output/txt
+
+if [ "$cli_output_json" = "yes" ]; then
+    JSON
+fi

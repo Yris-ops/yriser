@@ -458,4 +458,8 @@ echo "  - CSV: $(pwd)/output/csv/$OUTPUT_CSV"
 echo "  - CSV: $(pwd)/output/csv/mul-$OUTPUT_CSV"
 fi
 
+if [ "$cli_output_json" = "yes" ]; then
+echo "  - JSON: $(pwd)/output/json/$OUTPUT_FILE.json"
+fi
+
 rm -rf output/.txt 2> /dev/null
