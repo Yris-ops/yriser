@@ -84,3 +84,11 @@ Yriser can use your custom AWS Profile with:
 ``` shell
 ./yriser.sh -p <aws_profile>
 ```
+
+### Send report to AWS S3 Bucket
+
+To save your report in an S3 bucket, use -s to be uploaded to S3:
+
+``` shell
+./yriser.sh -s bucket-yriser-demo
+```

@@ -2,6 +2,6 @@ __  __     _
 \ \/ /____(_)_______  _____
  \  / ___/ / ___/ _ \/ ___/
  / / /  / (__  )  __/ /    
-/_/_/  /_/____/\___/_/ v0.0.1 - Fatboy
+/_/_/  /_/____/\___/_/ v0.0.2 - Lisa
 An Open-Source FinOps Tool for Efficient Tag Management
 

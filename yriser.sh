@@ -3,10 +3,11 @@
 # Copyright: Apache License 2.0
 # Yriser - https://github.com/yris-ops/yriser
 
-export VERSION="0.0.1-Fatboy-26July2023"
+export VERSION="0.0.2-Lisa-15August2023"
 REGION_LIST="allregions"
 show_banner=true
 specific_aws_profile=true
+s3_aws_profile=false
 config_file="config.txt"
 export PATH_DATE=$(date +"%Y%m%d%H%M%S")
 export cli_output_html="yes"
@@ -28,7 +29,7 @@ Command line options:
     -u,   only cli output whiout json
 
 Yriser Available Cloud Providers:
-    -a,,  show AWS Provider help
+    -a,  show AWS Provider help
 
 Detailed documentation at https://www.docs.yriser.com
 '
@@ -40,6 +41,7 @@ usage: ./yriser.sh -a
 Command line options:
     -r,   scan specific AWS Region
     -p,   use AWS Profile
+    -s,   send report to AWS S3 Bucket
 
 AWS Regions:
 us-east-1 us-east-2 us-west-1 us-west-2 af-south-1 ap-east-1 ap-south-2 ap-southeast-3 ap-southeast-4 ap-south-1 ap-northeast-1 ap-northeast-2 ap-northeast-3 ap-northeast-4 ap-northeast-1 ca-central-1 eu-central-1 eu-central-2 eu-west-1 eu-west-2 eu-west-3 eu-south-1 eu-south-2 eu-north-1 sa-east-1 me-central-1 us-gov-east-1 us-gov-west-1
@@ -99,7 +101,16 @@ Profile_AWS()
     AWSARN=$(echo $SSO_ARN | tr -d '"')
 }
 
-while getopts "h/a/v/b/c/o/u/j/y/r:/p:" option; do
+# Send output in AWS S3
+S3()
+{
+    echo
+    echo "Upload into the bucket: $AWS_S3_NAME, please wait"
+    aws s3 cp output s3://$AWS_S3_NAME/ --recursive --quiet
+    echo "Upload into the bucket: $AWS_S3_NAME, done"
+}
+
+while getopts "h/a/v/b/c/o/u/j/y/r:/p:/s:" option; do
     case $option in
       h) # display help
          echo "$COMMAND_LINE_OPTIONS_HELP"
@@ -131,6 +142,10 @@ while getopts "h/a/v/b/c/o/u/j/y/r:/p:" option; do
       p) # specific aws profider profile
          specific_aws_profile=false
          Profile_AWS
+         ;;
+      s) # send output in aws s3
+         AWS_S3_NAME+="$OPTARG"
+         s3_aws_profile=true
          ;;
       \?) # incorrect option
          echo "Error: Invalid option"
@@ -335,6 +350,10 @@ if [ ${#SSO_ACCOUNT} -eq 14 ] || aws sts get-caller-identity &> /dev/null; then
 fi 
 
 rm -rf output/txt
+
+if $s3_aws_profile; then
+    S3
+fi
 
 if [ "$cli_output_json" = "yes" ]; then
     JSON

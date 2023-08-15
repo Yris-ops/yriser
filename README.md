@@ -7,7 +7,6 @@
   <a href="https://github.com/yris-ops/yriser/issues"><img alt="Issues" src="https://img.shields.io/github/issues/yris-ops/yriser"></a>
   <a href="https://github.com/yris-ops/yriser/releases"><img alt="Version" src="https://img.shields.io/github/v/release/yris-ops/yriser?include_prereleases"></a>
   <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/czantoine/yriser"></a>
-  <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker" src="https://img.shields.io/docker/cloud/build/czantoine/yriser"></a>
   <a href="https://hub.docker.com/r/czantoine/yriser"><img alt="Docker" src="https://img.shields.io/docker/image-size/czantoine/yriser"></a>
   <a href="https://github.com/yris-ops/yriser/releases"><img alt="Version" src="https://img.shields.io/github/release-date/yris-ops/yriser"></a>
 	<a href="https://github.com/yris-ops/yriser"><img alt="Stars" src="https://img.shields.io/github/stars/Yris-ops/yriser"></a>
