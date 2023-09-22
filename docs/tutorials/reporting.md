@@ -65,3 +65,11 @@ Multiple Tag:
   }
 ]
 ```
+
+## Slack
+
+Send a notification on Slack when the audit is complete.
+
+![Send report result to Slack](img/report-slack.png)
+
+See Slack [documentation to create a weebhook](https://api.slack.com/messaging/webhooks)

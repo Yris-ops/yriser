@@ -463,3 +463,68 @@ echo "  - JSON: $(pwd)/output/json/$OUTPUT_FILE.json"
 fi
 
 rm -rf output/.txt 2> /dev/null
+
+# Slack message
+if [ "$WEBHOOK_URL" != ""  ]; then
+MESSAGE='{
+    "blocks": [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Hi there 👋\n\n*Yriser*, FinOps tool to perform AWS tagging best practices, tagging strategy, continuous adjustments in cloud optimization 🛣️\n\n I have just finished the scan on your AWS Account *'"$ACCOUNT"'* ('"$REGION"')  with a total *'"$TOTAL_RESOURCES"' ressources scanning*. "
+            },
+            "accessory": {
+                "type": "image",
+                "image_url": "https://avatars.githubusercontent.com/u/124205798?s=200&v=4",
+                "alt_text": "cute cat"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "plain_text",
+                "text": "🏷️ '"$TAG_CPT"' Total Tags\n✅ '"$NUMBER_OF_OK"' Correctly tagged ('"$TAG_CORRECT_PER"'%)\n📊 '"$NUMBER_OF_ERRORS"' Errors ('"$NUMBER_OF_ERRORS_PER"'%)\n🛑 '"$NUMBER_OF_ERRORS_CAL"' Ressources with other tags ('"$NUMBER_OF_ERRORS_CAL_PER"'%)\n❌ '"$number_RESOURCETAGMAPPINGLIST_without_tag"' Without tag ('"$number_RESOURCETAGMAPPINGLIST_without_tag_PER"'%)",
+                "emoji": true
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Used parameters `-'"$SOURCE_FILE"' -'"$OUTPUT_FILE"' -'"$OUTPUT_CSV"'`"
+            }
+        },
+        {
+            "type": "divider"
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Version '"$VERSION"' | Join us"
+            },
+            "accessory": {
+                "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Yris :slack:",
+                    "emoji": true
+                },
+                "value": "click_me_123",
+                "url": "https://join.slack.com/t/yrisgroupe/shared_invite/zt-1q51z8dmv-GC0XzUSclzBnUQ0tpKhznw",
+                "action_id": "button-action"
+            }
+        }
+    ]
+}'
+
+curl -X POST -H 'Content-type: application/json' --data "$MESSAGE" "$WEBHOOK_URL" &> /dev/null
+echo ""
+fi

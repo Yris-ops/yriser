@@ -3,7 +3,7 @@
 # Copyright: Apache License 2.0
 # Yriser - https://github.com/yris-ops/yriser
 
-export VERSION="0.0.2-Lisa-15August2023"
+export VERSION="0.0.3-SantaFe-22September2023"
 REGION_LIST="allregions"
 show_banner=true
 specific_aws_profile=true
@@ -26,7 +26,8 @@ Command line options:
     -w,   show config file
     -o,   only cli output whiout html
     -u,   only cli output whiout csv
-    -u,   only cli output whiout json
+    -j,   only cli output whiout json
+    -w,   send report result to slack
 
 Yriser Available Cloud Providers:
     -a,  show AWS Provider help
@@ -110,7 +111,13 @@ S3()
     echo "Upload into the bucket: $AWS_S3_NAME, done"
 }
 
-while getopts "h/a/v/b/c/o/u/j/y/r:/p:/s:" option; do
+# Send Slack message
+Slack()
+{
+    export WEBHOOK_URL="$WEBHOOK_URL"
+}
+
+while getopts "h/a/v/b/c/o/u/j/y/r:/p:/s:/w:" option; do
     case $option in
       h) # display help
          echo "$COMMAND_LINE_OPTIONS_HELP"
@@ -146,6 +153,10 @@ while getopts "h/a/v/b/c/o/u/j/y/r:/p:/s:" option; do
       s) # send output in aws s3
          AWS_S3_NAME+="$OPTARG"
          s3_aws_profile=true
+         ;;
+      w) # send report result to slack
+         WEBHOOK_URL+="$OPTARG"
+         Slack
          ;;
       \?) # incorrect option
          echo "Error: Invalid option"

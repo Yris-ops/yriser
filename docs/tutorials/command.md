@@ -59,6 +59,14 @@ Only CLI Input without JSON.
 
 > Do not disable output without CSV (command -u) for the JSON outputs
 
+## Slack
+
+Send report result to Slack
+
+``` shell
+./yriser.sh -w <webhook_token>
+```
+
 ## AWS
 
 ### AWS - Display help documentation
