@@ -32,7 +32,7 @@
 
 ## 📃 Documentation
 
-The full documentation can be found at [https://www.docs.yriser.com](https://www.docs.yriser.com)
+The full documentation can be found at [https://yris-ops.github.io/yriser/](https://yris-ops.github.io/yriser/)
 
 ## 🚀 Quick Start
 
@@ -48,7 +48,7 @@ Once Yriser repository is cloned, get into the folder and you can run it:
 cd yriser
 ```
 
-### Configuration file 
+### Configuration file
 
 Edit the configuration file 
 
@@ -96,7 +96,7 @@ You can always use -h to access to the usage information and all the possible op
 ./yriser.sh -h
 ```
 
-More details at [https://www.docs.yriser.com](https://www.docs.yriser.com)
+More details at [https://yris-ops.github.io/yriser/](https://yris-ops.github.io/yriser/)
 
 ## Docker
 
