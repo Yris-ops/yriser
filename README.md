@@ -22,6 +22,10 @@
 
 **Yriser** is an Open Source FinOps tool to perform AWS tagging best practices, tagging strategy, continuous adjustments in cloud optimization.
 
+[![pages-build-deployment](https://github.com/Yris-ops/yriser/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/pages/pages-build-deployment)
+[![yriser-docker](https://github.com/Yris-ops/yriser/actions/workflows/docker.yml/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/docker.yml)
+[![yriser-documentation](https://github.com/Yris-ops/yriser/actions/workflows/documentation.yml/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/documentation.yml)
+
 **Yriser** will help you answer these questions:
 
 * How are tags enforced and what methods and automation will be used (proactive vs reactive)?
