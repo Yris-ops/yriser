@@ -20,9 +20,14 @@
 
 ## Description
 
+<p align="center">
+  <a href="https://github.com/Yris-ops/yriser">
+    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" alt="Open Source Love">
+  </a>
+</p>
+
 **Yriser** is an Open Source FinOps tool to perform AWS tagging best practices, tagging strategy, continuous adjustments in cloud optimization.
 
-[![pages-build-deployment](https://github.com/Yris-ops/yriser/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/pages/pages-build-deployment)
 [![yriser-docker](https://github.com/Yris-ops/yriser/actions/workflows/docker.yml/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/docker.yml)
 [![yriser-documentation](https://github.com/Yris-ops/yriser/actions/workflows/documentation.yml/badge.svg)](https://github.com/Yris-ops/yriser/actions/workflows/documentation.yml)
 
